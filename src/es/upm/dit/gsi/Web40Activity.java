@@ -42,7 +42,7 @@ public class Web40Activity {
                         mCallbackText.setText("Received from service: " + msg.arg1);
                         break;
                     case MessengerService.MSG_HELLO:
-                    	Toast.makeText(Binding.this, "Buen trabajo chico",Toast.LENGTH_SHORT).show();
+                    	Toast.makeText(Binding.this, "Helloo!!",Toast.LENGTH_SHORT).show();
                     	break;
                     default:
                         super.handleMessage(msg);

@@ -89,31 +89,19 @@ public class Socketer extends Service {
             public void onConnect() {
             	
             	Log.v("SocketIO","Connection established");
-        		//Toast.makeText(getBaseContext(),"Connected to socket.io",Toast.LENGTH_SHORT).show();
-            	//toast();
-            	this.suma();
-        		System.out.println("Conectado");
+        		
+            	notifier("Conectado");
             }
 
             @Override
             public void on(String event, IOAcknowledge ack, Object... args) {
             	
-            	this.runception();
+            	
             	Log.v("SocketIO","Server triggered event '" + event + "'");
-            	//t.start();
-            	notifier(args[0].toString());
+            	
 
             }
-            private int suma(){
-        		int i=2+2;
-        		return i;
-        	}
-            private void runception(){
-            	SocketThread st=new SocketThread(context);
-        		final Thread t=new Thread(st);
-        		t.start();
-            }
-
+          
 			
         });
 
@@ -142,15 +130,4 @@ public class Socketer extends Service {
 	}
 
 }
-class SocketThread implements Runnable{
-	
-	Context context;
-	public SocketThread(Context context){
-		this.context=context;
-	}
-	public void run(){
-		
-		Toast.makeText(this.context,"Connected to socket.io",Toast.LENGTH_SHORT).show();
-		}
-	
-}
+

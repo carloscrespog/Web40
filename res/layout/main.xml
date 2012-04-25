@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:padding="4dip"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingBottom="4dip"
+        android:text="Conectando"/>
+
+    <Button android:id="@+id/bind"
+        android:layout_width="wrap_content" android:layout_height="wrap_content" 
+        android:text="Conectar">
+        <requestFocus />
+    </Button>
+
+    <Button android:id="@+id/unbind"
+        android:layout_width="wrap_content" android:layout_height="wrap_content" 
+        android:text="Desconectar">
+    </Button>
+
+    <TextView android:id="@+id/callback"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:gravity="center_horizontal" android:paddingTop="4dip"/>
+
 </LinearLayout>

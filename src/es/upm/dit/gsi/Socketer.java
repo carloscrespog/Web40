@@ -19,7 +19,10 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -67,8 +70,10 @@ public class Socketer extends Service {
             @Override
             public void onMessage(String data, IOAcknowledge ack) {
             	Log.v("SocketIO","Server said: " + data);
-            	notifier(data.toString());
-
+            	Context context = getApplicationContext();
+    					Toast.makeText(context, "Error", Toast.LENGTH_SHORT)
+    							.show();
+    				
             }
 
             @Override
@@ -89,31 +94,23 @@ public class Socketer extends Service {
             public void onConnect() {
             	
             	Log.v("SocketIO","Connection established");
-        		//Toast.makeText(getBaseContext(),"Connected to socket.io",Toast.LENGTH_SHORT).show();
-            	//toast();
-            	this.suma();
-        		System.out.println("Conectado");
             }
 
             @Override
             public void on(String event, IOAcknowledge ack, Object... args) {
             	
-            	this.runception();
+            	
             	Log.v("SocketIO","Server triggered event '" + event + "'");
-            	//t.start();
-            	notifier(args[0].toString());
+            	
+            	
 
             }
-            private int suma(){
-        		int i=2+2;
-        		return i;
-        	}
+           
             private void runception(){
-            	SocketThread st=new SocketThread(context);
-        		final Thread t=new Thread(st);
+            	//SocketThread st=new SocketThread(context);
+        		final Thread t=new LooperThread(context);
         		t.start();
             }
-
 			
         });
 
@@ -143,14 +140,33 @@ public class Socketer extends Service {
 
 }
 class SocketThread implements Runnable{
-	
+
 	Context context;
 	public SocketThread(Context context){
 		this.context=context;
 	}
 	public void run(){
-		
-		Toast.makeText(this.context,"Connected to socket.io",Toast.LENGTH_SHORT).show();
+
+		Toast.makeText(this.context,"Hello!",Toast.LENGTH_SHORT).show();
 		}
-	
+
+}
+class LooperThread extends Thread {
+    public Handler mHandler;
+    static Context sContext;
+	public LooperThread(Context context){
+		this.sContext=context;
+	}
+    public void run() {
+        Looper.prepare();
+
+        mHandler = new Handler() {
+            public void handleMessage(Message msg) {
+        		Toast.makeText(sContext,"Hello!",Toast.LENGTH_SHORT).show();
+        		
+            }
+        };
+
+        Looper.loop();
+    }
 }

@@ -98,7 +98,8 @@ public class Socketer extends Service {
             	
             	
             	Log.v("SocketIO","Server triggered event '" + event + "'");
-            	
+				Toast.makeText(getBaseContext(),"Hola!",Toast.LENGTH_SHORT).show();
+
 
             }
           

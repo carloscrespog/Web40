@@ -38,11 +38,12 @@ public class Web40Activity {
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
-                    case MessengerService.MSG_SET_VALUE:
-                        mCallbackText.setText("Received from service: " + msg.arg1);
-                        break;
+                    
                     case MessengerService.MSG_HELLO:
                     	Toast.makeText(Binding.this, "Helloo!!",Toast.LENGTH_SHORT).show();
+                    	break;
+                    case MessengerService.MSG_DISPLAY:
+                    	Toast.makeText(Binding.this, "Message Received :)",Toast.LENGTH_SHORT).show();
                     	break;
                     default:
                         super.handleMessage(msg);
@@ -78,9 +79,7 @@ public class Web40Activity {
                     mService.send(msg);
 
                     // Give it some value as an example.
-                    msg = Message.obtain(null,
-                            MessengerService.MSG_SET_VALUE, this.hashCode(), 0);
-                    mService.send(msg);
+                    
                 } catch (RemoteException e) {
                     // In this case the service has crashed before we could even
                     // do anything with it; we can count on soon being
@@ -119,17 +118,7 @@ public class Web40Activity {
             if (mIsBound) {
                 // If we have received the service, and hence registered with
                 // it, then now is the time to unregister.
-                if (mService != null) {
-                    try {
-                        Message msg = Message.obtain(null,
-                                MessengerService.MSG_UNREGISTER_CLIENT);
-                        msg.replyTo = mMessenger;
-                        mService.send(msg);
-                    } catch (RemoteException e) {
-                        // There is nothing special we need to do if the service
-                        // has crashed.
-                    }
-                }
+                
 
                 // Detach our existing connection.
                 unbindService(mConnection);

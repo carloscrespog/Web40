@@ -11,10 +11,29 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int icon=0x7f020000;
+        public static final int backgroundhdpi=0x7f020000;
+        public static final int backgroundhdpiland=0x7f020001;
+        public static final int bocadillo_bot=0x7f020002;
+        public static final int bocadillo_bot2=0x7f020003;
+        public static final int bocadillo_user=0x7f020004;
+        public static final int bocadillo_user2=0x7f020005;
+        public static final int icon=0x7f020006;
+        public static final int web40avatarcolourarthdpi=0x7f020007;
+    }
+    public static final class id {
+        public static final int avatar=0x7f050003;
+        public static final int bubbleText=0x7f050002;
+        public static final int button_send=0x7f050007;
+        public static final int conversacion=0x7f050004;
+        public static final int edit_text_out=0x7f050006;
+        public static final int linearLayout1=0x7f050005;
+        public static final int linearText=0x7f050001;
+        public static final int linear_layout=0x7f050000;
     }
     public static final class layout {
-        public static final int main=0x7f030000;
+        public static final int bubble=0x7f030000;
+        public static final int list_item=0x7f030001;
+        public static final int main=0x7f030002;
     }
     public static final class string {
         public static final int app_name=0x7f040001;

@@ -108,9 +108,9 @@ public class MessengerService extends Service {
             @Override
             public void onMessage(String data, IOAcknowledge ack) {
             	Log.v("SocketIO","Server said: " + data);
-            	/*
+            	
             	Message msgi = Message.obtain(null,
-                        MessengerService.MSG_DISPLAY);
+                        MessengerService.MSG_DISPLAY,data);
                 
 				try {
 					mActivity.send(msgi);
@@ -118,23 +118,7 @@ public class MessengerService extends Service {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				*/showNotification("SocketIO","Has recibido un mensaje");
-				
-				    new Thread(new Runnable() {
-				        public void run() {
-				        	
-				        	Message msgi = Message.obtain(null,
-			                        MessengerService.MSG_DISPLAY);
-			                
-							try {
-								mActivity.send(msgi);
-							} catch (RemoteException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-				            
-				        }
-				    }).start();
+				showNotification("SocketIO","Has recibido un mensaje");
 				
             }
 

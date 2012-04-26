@@ -28,9 +28,7 @@ public class Web40Activity {
         Messenger mService = null;
         /** Flag indicating whether we have called bind on the service. */
         boolean mIsBound;
-        /** Some text view we are using to show state information. */
-        TextView mCallbackText;
-
+        
         /**
          * Handler of incoming messages from service.
          */
@@ -43,7 +41,8 @@ public class Web40Activity {
                     	Toast.makeText(Binding.this, "Helloo!!",Toast.LENGTH_SHORT).show();
                     	break;
                     case MessengerService.MSG_DISPLAY:
-                    	Toast.makeText(Binding.this, "Message Received :)",Toast.LENGTH_SHORT).show();
+                    	
+                    	Toast.makeText(Binding.this, (CharSequence) msg.obj,Toast.LENGTH_SHORT).show();
                     	break;
                     default:
                         super.handleMessage(msg);
@@ -68,7 +67,7 @@ public class Web40Activity {
                 // service through an IDL interface, so get a client-side
                 // representation of that from the raw service object.
                 mService = new Messenger(service);
-                mCallbackText.setText("Attached.");
+                
 
                 // We want to monitor the service for as long as we are
                 // connected to it.
@@ -96,7 +95,7 @@ public class Web40Activity {
                 // This is called when the connection with the service has been
                 // unexpectedly disconnected -- that is, its process crashed.
                 mService = null;
-                mCallbackText.setText("Disconnected.");
+              
 
                 // As part of the sample, tell the user what happened.
                 Toast.makeText(Binding.this, "Desconectado del servicio remoto",
@@ -111,7 +110,7 @@ public class Web40Activity {
             bindService(new Intent(Binding.this, 
                     MessengerService.class), mConnection, Context.BIND_AUTO_CREATE);
             mIsBound = true;
-            mCallbackText.setText("Binding.");
+            
         }
 
         void doUnbindService() {
@@ -123,7 +122,7 @@ public class Web40Activity {
                 // Detach our existing connection.
                 unbindService(mConnection);
                 mIsBound = false;
-                mCallbackText.setText("Unbinding.");
+                
             }
         }
 
@@ -137,26 +136,13 @@ public class Web40Activity {
 
             setContentView(R.layout.main);
 
-            // Watch for button clicks.
-            Button button = (Button)findViewById(R.id.bind);
-            button.setOnClickListener(mBindListener);
-            button = (Button)findViewById(R.id.unbind);
-            button.setOnClickListener(mUnbindListener);
-
-            mCallbackText = (TextView)findViewById(R.id.callback);
-            mCallbackText.setText("Not attached.");
+            doBindService();
         }
 
-        private OnClickListener mBindListener = new OnClickListener() {
-            public void onClick(View v) {
-                doBindService();
-            }
-        };
-
-        private OnClickListener mUnbindListener = new OnClickListener() {
-            public void onClick(View v) {
-                doUnbindService();
-            }
-        };
+        @Override
+        protected void onDestroy(){
+        	doUnbindService();
+        }
+        
     }
 }
